@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.5.40, for osx10.6 (i386)
 --
--- Host: localhost    Database: secondhandmarket
+-- Host: localhost    Database: secondhandMarket
 -- ------------------------------------------------------
 -- Server version	5.5.40
 
@@ -16,37 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Customer`
---
-
-DROP TABLE IF EXISTS `Customer`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Customer` (
-  `cid` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(10) DEFAULT NULL,
-  `password` varchar(32) DEFAULT NULL,
-  `province` varchar(3) DEFAULT NULL,
-  `city` varchar(10) DEFAULT NULL,
-  `area` varchar(32) DEFAULT NULL,
-  `school` varchar(32) DEFAULT NULL,
-  `phonenumber` varchar(11) DEFAULT NULL,
-  `isAdmin` int(11) DEFAULT NULL,
-  `authority` int(11) DEFAULT NULL,
-  PRIMARY KEY (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Customer`
---
-
-LOCK TABLES `Customer` WRITE;
-/*!40000 ALTER TABLE `Customer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Customer` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `buyerRecord`
 --
 
@@ -55,18 +24,19 @@ DROP TABLE IF EXISTS `buyerRecord`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `buyerRecord` (
   `bid` int(11) NOT NULL AUTO_INCREMENT,
+  `gname` varchar(32) DEFAULT NULL,
   `hasPay` int(11) DEFAULT NULL,
   `price` float DEFAULT NULL,
   `gid` int(11) DEFAULT NULL,
   `buyerId` int(11) DEFAULT NULL,
   `salerId` int(11) DEFAULT NULL,
   PRIMARY KEY (`bid`),
-  KEY `FKD57E07E457C8DBC5` (`buyerId`),
-  KEY `FKD57E07E4B83AAD1D` (`salerId`),
-  KEY `FKD57E07E4F201D2D8` (`gid`),
-  CONSTRAINT `FKD57E07E4F201D2D8` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`),
-  CONSTRAINT `FKD57E07E457C8DBC5` FOREIGN KEY (`buyerId`) REFERENCES `Customer` (`cid`),
-  CONSTRAINT `FKD57E07E4B83AAD1D` FOREIGN KEY (`salerId`) REFERENCES `Customer` (`cid`)
+  KEY `FKD57E07E42236FBD4` (`buyerId`),
+  KEY `FKD57E07E482A8CD2C` (`salerId`),
+  KEY `FKD57E07E419E85267` (`gid`),
+  CONSTRAINT `FKD57E07E419E85267` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`),
+  CONSTRAINT `FKD57E07E42236FBD4` FOREIGN KEY (`buyerId`) REFERENCES `Customer` (`cid`),
+  CONSTRAINT `FKD57E07E482A8CD2C` FOREIGN KEY (`salerId`) REFERENCES `Customer` (`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -87,13 +57,15 @@ DROP TABLE IF EXISTS `collection`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `collection` (
-  `cid` int(11) NOT NULL,
-  `gid` int(11) NOT NULL,
-  PRIMARY KEY (`cid`,`gid`),
-  KEY `FK9835AE9EF201D2D8` (`gid`),
-  KEY `FK9835AE9E4927EE75` (`cid`),
-  CONSTRAINT `FK9835AE9E4927EE75` FOREIGN KEY (`cid`) REFERENCES `Customer` (`cid`),
-  CONSTRAINT `FK9835AE9EF201D2D8` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`)
+  `clid` int(11) NOT NULL AUTO_INCREMENT,
+  `gname` varchar(32) DEFAULT NULL,
+  `cid` int(11) DEFAULT NULL,
+  `gid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`clid`),
+  KEY `FK9835AE9E19E85267` (`gid`),
+  KEY `FK9835AE9E13960E84` (`cid`),
+  CONSTRAINT `FK9835AE9E13960E84` FOREIGN KEY (`cid`) REFERENCES `Customer` (`cid`),
+  CONSTRAINT `FK9835AE9E19E85267` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -104,6 +76,36 @@ CREATE TABLE `collection` (
 LOCK TABLES `collection` WRITE;
 /*!40000 ALTER TABLE `collection` DISABLE KEYS */;
 /*!40000 ALTER TABLE `collection` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `customer`
+--
+
+DROP TABLE IF EXISTS `customer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `customer` (
+  `cid` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) DEFAULT NULL,
+  `password` varchar(32) DEFAULT NULL,
+  `province` varchar(3) DEFAULT NULL,
+  `city` varchar(10) DEFAULT NULL,
+  `area` varchar(32) DEFAULT NULL,
+  `school` varchar(32) DEFAULT NULL,
+  `phonenumber` varchar(11) DEFAULT NULL,
+  `authority` int(11) DEFAULT NULL,
+  PRIMARY KEY (`cid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `customer`
+--
+
+LOCK TABLES `customer` WRITE;
+/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -119,10 +121,10 @@ CREATE TABLE `evaluation` (
   `cid` int(11) DEFAULT NULL,
   `gid` int(11) DEFAULT NULL,
   PRIMARY KEY (`eid`),
-  KEY `FK332C073CF201D2D8` (`gid`),
-  KEY `FK332C073C4927EE75` (`cid`),
-  CONSTRAINT `FK332C073C4927EE75` FOREIGN KEY (`cid`) REFERENCES `Customer` (`cid`),
-  CONSTRAINT `FK332C073CF201D2D8` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`)
+  KEY `FK332C073C19E85267` (`gid`),
+  KEY `FK332C073C13960E84` (`cid`),
+  CONSTRAINT `FK332C073C13960E84` FOREIGN KEY (`cid`) REFERENCES `Customer` (`cid`),
+  CONSTRAINT `FK332C073C19E85267` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -149,9 +151,10 @@ CREATE TABLE `good` (
   `isOnline` int(11) DEFAULT NULL,
   `category` varchar(32) DEFAULT NULL,
   `posterId` int(11) DEFAULT NULL,
+  `gname` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`gid`),
-  KEY `FK3080BD764D58DF` (`posterId`),
-  CONSTRAINT `FK3080BD764D58DF` FOREIGN KEY (`posterId`) REFERENCES `Customer` (`cid`)
+  KEY `FK3080BD40BB78EE` (`posterId`),
+  CONSTRAINT `FK3080BD40BB78EE` FOREIGN KEY (`posterId`) REFERENCES `Customer` (`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -175,15 +178,16 @@ CREATE TABLE `message` (
   `mid` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(10) DEFAULT NULL,
   `content` varchar(100) DEFAULT NULL,
-  `isFromToSA` int(11) DEFAULT NULL,
   `mstime` datetime DEFAULT NULL,
   `sender` int(11) DEFAULT NULL,
   `receiver` int(11) DEFAULT NULL,
+  `category` tinyint(4) DEFAULT NULL,
+  `hasRead` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`mid`),
-  KEY `FK38EB0007132687EC` (`sender`),
-  KEY `FK38EB000718F257A6` (`receiver`),
-  CONSTRAINT `FK38EB000718F257A6` FOREIGN KEY (`receiver`) REFERENCES `Customer` (`cid`),
-  CONSTRAINT `FK38EB0007132687EC` FOREIGN KEY (`sender`) REFERENCES `Customer` (`cid`)
+  KEY `FK38EB0007DD94A7FB` (`sender`),
+  KEY `FK38EB0007E36077B5` (`receiver`),
+  CONSTRAINT `FK38EB0007DD94A7FB` FOREIGN KEY (`sender`) REFERENCES `Customer` (`cid`),
+  CONSTRAINT `FK38EB0007E36077B5` FOREIGN KEY (`receiver`) REFERENCES `Customer` (`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -210,13 +214,14 @@ CREATE TABLE `morder` (
   `gid` int(11) DEFAULT NULL,
   `buyerId` int(11) DEFAULT NULL,
   `salerId` int(11) DEFAULT NULL,
+  `gname` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`oid`),
-  KEY `FKC051C30157C8DBC5` (`buyerId`),
-  KEY `FKC051C301B83AAD1D` (`salerId`),
-  KEY `FKC051C301F201D2D8` (`gid`),
-  CONSTRAINT `FKC051C301F201D2D8` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`),
-  CONSTRAINT `FKC051C30157C8DBC5` FOREIGN KEY (`buyerId`) REFERENCES `Customer` (`cid`),
-  CONSTRAINT `FKC051C301B83AAD1D` FOREIGN KEY (`salerId`) REFERENCES `Customer` (`cid`)
+  KEY `FKC051C3012236FBD4` (`buyerId`),
+  KEY `FKC051C30182A8CD2C` (`salerId`),
+  KEY `FKC051C30119E85267` (`gid`),
+  CONSTRAINT `FKC051C30119E85267` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`),
+  CONSTRAINT `FKC051C3012236FBD4` FOREIGN KEY (`buyerId`) REFERENCES `Customer` (`cid`),
+  CONSTRAINT `FKC051C30182A8CD2C` FOREIGN KEY (`salerId`) REFERENCES `Customer` (`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -228,30 +233,6 @@ LOCK TABLES `morder` WRITE;
 /*!40000 ALTER TABLE `morder` DISABLE KEYS */;
 /*!40000 ALTER TABLE `morder` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `superAdmin`
---
-
-DROP TABLE IF EXISTS `superAdmin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `superAdmin` (
-  `said` int(11) NOT NULL AUTO_INCREMENT,
-  `sname` varchar(10) DEFAULT NULL,
-  `password` varchar(32) DEFAULT NULL,
-  PRIMARY KEY (`said`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `superAdmin`
---
-
-LOCK TABLES `superAdmin` WRITE;
-/*!40000 ALTER TABLE `superAdmin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `superAdmin` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -262,4 +243,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-29 18:12:31
+-- Dump completed on 2015-08-29 14:01:47
