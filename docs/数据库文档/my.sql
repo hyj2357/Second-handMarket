@@ -95,8 +95,9 @@ CREATE TABLE `customer` (
   `school` varchar(32) DEFAULT NULL,
   `phonenumber` varchar(11) DEFAULT NULL,
   `authority` int(11) DEFAULT NULL,
+  `qqnumber` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,6 +106,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +190,7 @@ CREATE TABLE `message` (
   KEY `FK38EB0007E36077B5` (`receiver`),
   CONSTRAINT `FK38EB0007DD94A7FB` FOREIGN KEY (`sender`) REFERENCES `Customer` (`cid`),
   CONSTRAINT `FK38EB0007E36077B5` FOREIGN KEY (`receiver`) REFERENCES `Customer` (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,6 +199,7 @@ CREATE TABLE `message` (
 
 LOCK TABLES `message` WRITE;
 /*!40000 ALTER TABLE `message` DISABLE KEYS */;
+INSERT INTO `message` VALUES (1,'s','sddsa',NULL,1,1,1,1),(2,'?','sddsa',NULL,1,1,1,1);
 /*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,4 +246,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-29 14:01:47
+-- Dump completed on 2015-08-30 15:47:25
