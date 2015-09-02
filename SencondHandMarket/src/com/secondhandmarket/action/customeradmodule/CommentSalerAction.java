@@ -8,6 +8,7 @@ public class CommentSalerAction extends ActionSupport{
 	private String evaluation;
 	private CustomerAdModule customerAdModule;
 	
+	@Override
 	public String execute(){
 		this.customerAdModule.commentSaler(customerId, salerId, evaluation);
 	    return SUCCESS;	

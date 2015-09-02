@@ -8,7 +8,8 @@ public class CommentGoodAction extends ActionSupport{
      private String content;
      private CustomerAdModule customerAdModule;
      
-     public String execute(){
+     @Override
+	public String execute(){
     	this.customerAdModule.commentGood(cid, gid, content);
         return SUCCESS;	 
      }

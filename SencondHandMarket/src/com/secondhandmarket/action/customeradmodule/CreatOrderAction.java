@@ -7,6 +7,7 @@ public class CreatOrderAction extends ActionSupport{
 	private int customerId,gid;
 	private CustomerAdModule customerAdModule;
 	
+	@Override
 	public String execute(){
 		this.customerAdModule.createOrder(customerId, gid);
 		return SUCCESS;

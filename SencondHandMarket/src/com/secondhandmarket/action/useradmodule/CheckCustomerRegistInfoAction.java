@@ -6,6 +6,7 @@ import com.secondhandmarket.service.UserAdModule;
 public class CheckCustomerRegistInfoAction extends ActionSupport{
 	private UserAdModule userAdModule;
 	
+	@Override
 	public String execute(){
 		this.userAdModule.checkCustomersRegist();
 		return SUCCESS;

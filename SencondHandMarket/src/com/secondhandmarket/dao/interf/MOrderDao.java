@@ -1,7 +1,5 @@
 package com.secondhandmarket.dao.interf;
 
-import java.util.List;
-
 import com.secondhandmarket.domain.MOrder;
 
 public interface MOrderDao extends BasicDao{

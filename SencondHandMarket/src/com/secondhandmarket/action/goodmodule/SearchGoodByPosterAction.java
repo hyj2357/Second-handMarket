@@ -10,7 +10,8 @@ public class SearchGoodByPosterAction extends ActionSupport{
      private GoodModule goodModule;
      private List goodList;
      
-     public String execute(){
+     @Override
+	public String execute(){
     	 this.goodList = this.goodModule.searchGoodByPoster(poster);
     	 return SUCCESS;
      }

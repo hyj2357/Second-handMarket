@@ -9,7 +9,8 @@ public class ModifyGoodInfoAction extends ActionSupport{
       private String intro,itemname,category,name,upload="false";  //itemname = gname  
       private SalerAdModule salerAdModule;
       
-      public String execute(){
+      @Override
+	public String execute(){
     	  upload = this.salerAdModule.modifyGoodInfo(gid, price, intro, itemname, category, name)?"true":"false";
     	  return SUCCESS;
       }

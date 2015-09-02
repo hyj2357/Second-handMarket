@@ -8,6 +8,7 @@ public class CheckNormalMessageAction extends ActionSupport{
 	private int receiver;
 	private MessageModule messageModule;
 	
+	@Override
 	public String execute(){
 		this.messageModule.checkNormalMessage(receiver);
 		return SUCCESS;

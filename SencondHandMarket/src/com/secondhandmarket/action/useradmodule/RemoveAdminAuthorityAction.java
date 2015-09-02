@@ -8,6 +8,7 @@ public class RemoveAdminAuthorityAction extends ActionSupport{
 	private String reason;
 	private UserAdModule userAdModule;
 	
+	@Override
 	public String execute(){
 		this.userAdModule.removeAdminAuthority(aid, sid, reason);
 		return SUCCESS;

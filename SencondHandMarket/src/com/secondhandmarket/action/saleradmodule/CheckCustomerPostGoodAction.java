@@ -7,7 +7,8 @@ public class CheckCustomerPostGoodAction extends ActionSupport{
    private int isAdmin;
    private SalerAdModule salerModule;
    
-   public String execute(){
+   @Override
+public String execute(){
 	   this.salerModule.checkCustomerPostGood(isAdmin);
 	   return SUCCESS;
    }

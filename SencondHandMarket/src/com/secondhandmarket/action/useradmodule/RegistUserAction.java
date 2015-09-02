@@ -7,7 +7,8 @@ public class RegistUserAction extends ActionSupport{
       private String name, password, province, city, area, school, phonenumber,qqnumber,user_registered="false",user_name_conflict="true";
       private UserAdModule userAdModule;
       
-      public String execute(){
+      @Override
+	public String execute(){
     	  boolean f = this.userAdModule.registUser(name, password, school, phonenumber,qqnumber)==null;
     	  this.user_registered = f?"false":"true";
     	  this.user_name_conflict=f?"true":"false";

@@ -20,9 +20,9 @@ public interface UserAdModule {
      * Jun:用户登录
      * @param name
      * @param password
-     * @return
+     * @return (registed logged)0:false false 1:true false 2:true true
      */
-    public boolean login(String name,String password);
+    public int login(String name,String password);
     /**
      * Jun:查看用户详细信息
      * @param cid

@@ -7,9 +7,25 @@ public class LoginAction extends ActionSupport{
 	private String name,password,user_registered="false",logged="false";
 	private UserAdModule userAdModule;
 	
+	@Override
 	public String execute(){
-		logged = this.userAdModule.login(name, password)?"true":"false";
-		user_registered = logged=="true"?"true":"false";
+		switch(this.userAdModule.login(name, password)){
+		 case 0:{
+			this.logged = "false";
+			this.user_registered  = "false";
+			break;
+		 }
+		 case 1:{
+			this.logged = "false";
+			this.user_registered = "true";
+			break;
+		 }
+		 case 2:{
+			this.logged = "true";
+			this.user_registered = "true";
+			break;	
+		 }
+		};
 		return SUCCESS;
 	}
 

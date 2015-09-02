@@ -8,18 +8,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import com.secondhandmarket.dao.interf.MOrderDao;
-import com.secondhandmarket.domain.BuyerRecord;
-import com.secondhandmarket.domain.Good;
 import com.secondhandmarket.domain.MOrder;
 
 public class MOrderDaoImpl extends BasicOperationImpl implements MOrderDao{
 
 	@Override
 	public boolean create(Object obj) {
-	    this.getHibernateTemplate().save( ((MOrder)obj) );
+	    this.getHibernateTemplate().save( (obj) );
 		return true;
 	}
 
@@ -30,12 +26,13 @@ public class MOrderDaoImpl extends BasicOperationImpl implements MOrderDao{
 		this.getHibernateTemplate().execute(
 				new HibernateCallback() {
 
+					@Override
 					public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
 
 						session.setFlushMode(FlushMode.AUTO); 
 
-						session.update(((MOrder)obj)); 
+						session.update((obj)); 
 
 						session.flush(); 
 
@@ -51,6 +48,7 @@ public class MOrderDaoImpl extends BasicOperationImpl implements MOrderDao{
 	    //this.getHibernateTemplate().delete(nt);
 		this.getHibernateTemplate().execute(
 				new HibernateCallback() {
+					@Override
 					public Object doInHibernate(Session session) throws HibernateException, SQLException {
 						session.setFlushMode(FlushMode.AUTO);
 						session.beginTransaction();

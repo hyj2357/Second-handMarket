@@ -8,7 +8,8 @@ public class LockCustomerAction extends ActionSupport{
     private String reason;
     private UserAdModule userAdModule;
     
-    public String execute(){
+    @Override
+	public String execute(){
     	this.userAdModule.lockCustomer(cid, aid, reason);
     	return SUCCESS;
     }

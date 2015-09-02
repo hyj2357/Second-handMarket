@@ -7,7 +7,8 @@ public class ComplainAdminAction extends ActionSupport{
    private String name,admin,complain,upload="false";
    private UserAdModule userAdModule;
    
-   public String execute(){
+   @Override
+public String execute(){
 	   upload = this.userAdModule.complainAdmin(name, admin, complain)?"true":"false";
 	   return SUCCESS;
    }

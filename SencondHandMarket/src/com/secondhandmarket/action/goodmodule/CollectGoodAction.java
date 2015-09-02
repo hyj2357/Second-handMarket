@@ -8,6 +8,7 @@ public class CollectGoodAction extends ActionSupport{
     private int gid;
     private GoodModule goodModule;
 	
+	@Override
 	public String execute(){
 		upload = this.goodModule.collectGood(name, gid)?"true":"false";
 		return SUCCESS;

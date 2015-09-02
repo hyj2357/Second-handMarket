@@ -7,6 +7,7 @@ public class PayOrderAction extends ActionSupport{
 
 	private OrderModule orderModule;
 	
+	@Override
 	public String execute(){
 		this.orderModule.payOrder();
 		return SUCCESS;

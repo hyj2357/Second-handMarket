@@ -8,7 +8,6 @@ import com.secondhandmarket.dao.interf.GoodDao;
 import com.secondhandmarket.dao.interf.MOrderDao;
 import com.secondhandmarket.dao.interf.MessageDao;
 import com.secondhandmarket.domain.Customer;
-import com.secondhandmarket.domain.Good;
 import com.secondhandmarket.domain.MOrder;
 import com.secondhandmarket.service.OrderModule;
 

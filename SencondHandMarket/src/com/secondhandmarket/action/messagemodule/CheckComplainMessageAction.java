@@ -7,7 +7,8 @@ public class CheckComplainMessageAction extends ActionSupport{
      private int receiver;
      private MessageModule messageModule;
      
-     public String execute(){
+     @Override
+	public String execute(){
     	this.messageModule.checkComplainMessage(receiver);
         return SUCCESS;
      }

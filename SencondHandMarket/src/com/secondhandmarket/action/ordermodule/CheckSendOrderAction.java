@@ -7,7 +7,8 @@ public class CheckSendOrderAction extends ActionSupport{
    private int buyerId;
    private OrderModule orderModule;
    
-   public String execute(){
+   @Override
+public String execute(){
 	   this.orderModule.checkSendOrder(buyerId);
 	   return SUCCESS;
    }

@@ -166,13 +166,23 @@ public class UserAdModuleImpl implements UserAdModule{
 	}
 	
 	@Override
-	public boolean login(String name, String password) {
+	public int login(String name, String password) {
         List ls = this.customerDao.find(null, 
         		              new String[]{"Customer"}, 
         		              new String[]{CustomerDao.ALIAS}, 
         		              CustomerDao.COLUMNS, CustomerDao.CLASSNAME, 
         		              new Object[]{null,name,password,null,null,null,null,null,null});    
-		return ls.size()==0?false:true;
+		if(ls.size()>0)
+			return 2;
+		List lsa = this.customerDao.find(null, 
+	              new String[]{"Customer"}, 
+	              new String[]{CustomerDao.ALIAS}, 
+	              CustomerDao.COLUMNS, CustomerDao.CLASSNAME, 
+	              new Object[]{null,name,null,null,null,null,null,null,null});
+		if(ls.size()>0)
+			return 1;
+		else 
+			return 0;
 	}
 
 	public CustomerDao getCustomerDao() {

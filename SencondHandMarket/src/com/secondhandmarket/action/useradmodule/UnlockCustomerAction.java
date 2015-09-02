@@ -7,7 +7,8 @@ public class UnlockCustomerAction extends ActionSupport{
      private int cid, aid;
      private UserAdModule userAdModule;
      
-     public String execute(){
+     @Override
+	public String execute(){
     	 this.userAdModule.unlockCustomer(cid, aid);
     	 return SUCCESS;
      }

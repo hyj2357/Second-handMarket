@@ -7,6 +7,7 @@ public class ComplainGoodAction extends ActionSupport{
 	private String name, poster, complain,upload="false";
 	private CustomerAdModule customerAdModule;
 	
+	@Override
 	public String execute(){
 		upload = this.customerAdModule.complainGood(name,poster, complain)?"true":"false";
 		return SUCCESS;

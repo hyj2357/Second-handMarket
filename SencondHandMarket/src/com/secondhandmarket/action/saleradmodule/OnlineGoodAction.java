@@ -7,7 +7,8 @@ public class OnlineGoodAction extends ActionSupport{
      private int posterId,gid;
      private SalerAdModule salerAdModule;
      
-     public String execute(){
+     @Override
+	public String execute(){
     	 this.salerAdModule.onlineGood(posterId, gid);
     	 return SUCCESS;
      }

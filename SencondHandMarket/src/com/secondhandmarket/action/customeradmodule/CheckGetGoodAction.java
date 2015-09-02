@@ -7,7 +7,8 @@ public class CheckGetGoodAction extends ActionSupport{
      private int cid;
      private CustomerAdModule customerAdModule;
      
-	 public String execute(){
+	 @Override
+	public String execute(){
          this.customerAdModule.checkGetGood(cid);
 		 return SUCCESS; 
      }

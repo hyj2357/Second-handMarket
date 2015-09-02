@@ -1,7 +1,5 @@
 package com.secondhandmarket.dao.interf;
 
-import java.util.List;
-
 import com.secondhandmarket.domain.Evaluation;
 
 public interface EvaluationDao extends BasicDao{

@@ -7,7 +7,8 @@ public class ModifyCustomerInfoAction extends ActionSupport{
     private String name, school, phonenumber,qqnumber,upload="false"; 
 	private UserAdModule userAdModule;
     
-    public String execute(){
+    @Override
+	public String execute(){
     	this.upload = this.userAdModule.modifyCustomerInfo( name, school, phonenumber,qqnumber)==null?"false":"true";
     	return SUCCESS;
     }

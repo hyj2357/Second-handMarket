@@ -10,7 +10,8 @@ public class PostGoodAction extends ActionSupport{
      private String category,upload="false";
      private SalerAdModule salerAdModule;
      
-     public String execute(){
+     @Override
+	public String execute(){
     	 this.upload = this.salerAdModule.postGood(price, intro, itemname, isOnline, category, name)?"true":"false";
     	 return SUCCESS;
      }

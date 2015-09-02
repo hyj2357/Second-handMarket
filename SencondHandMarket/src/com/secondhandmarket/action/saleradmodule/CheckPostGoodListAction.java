@@ -8,6 +8,7 @@ public class CheckPostGoodListAction extends ActionSupport{
 	private int posterId;
 	private SalerAdModule salerAdModule;
 	
+	@Override
 	public String execute(){
 		this.salerAdModule.checkPostGoodList(posterId);
 		return SUCCESS;

@@ -8,7 +8,8 @@ public class ModifyOrderPriceAction extends ActionSupport{
 	private float price;
     private OrderModule orderModule;
     
-    public String execute(){
+    @Override
+	public String execute(){
     	this.orderModule.modifyOrderPrice(salerId, oid, price);
     	return SUCCESS;
     }

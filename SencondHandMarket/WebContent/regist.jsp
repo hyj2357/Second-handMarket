@@ -18,6 +18,9 @@
             <td colspan="2"><input type="submit" value="登录"/><input type="reset" value="重填" /></td>
         </tr>
     </table>
+    <%
+         out.print(session.getAttribute("logged"));
+     %>
 </form>
 </body>
 </html>

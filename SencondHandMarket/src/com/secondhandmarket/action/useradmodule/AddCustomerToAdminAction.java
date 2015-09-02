@@ -7,6 +7,7 @@ public class AddCustomerToAdminAction extends ActionSupport{
 	private int cid,said;
 	private UserAdModule userAdModule;
 	
+	@Override
 	public String execute(){
 		this.userAdModule.addCustomerToAdmin(cid, said);
 		return SUCCESS;

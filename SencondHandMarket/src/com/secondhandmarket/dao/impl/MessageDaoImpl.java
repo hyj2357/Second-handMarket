@@ -10,19 +10,15 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import com.secondhandmarket.dao.interf.MessageDao;
-import com.secondhandmarket.domain.BuyerRecord;
 import com.secondhandmarket.domain.Customer;
-import com.secondhandmarket.domain.Good;
 import com.secondhandmarket.domain.Message;
 
 public class MessageDaoImpl extends BasicOperationImpl implements MessageDao{
 
 	@Override
 	public boolean create(Object obj) {
-	    this.getHibernateTemplate().save( ((Message)obj) );
+	    this.getHibernateTemplate().save( (obj) );
 		return true;
 	}
 
@@ -33,12 +29,13 @@ public class MessageDaoImpl extends BasicOperationImpl implements MessageDao{
 		this.getHibernateTemplate().execute(
 				new HibernateCallback() {
 
+					@Override
 					public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
 
 						session.setFlushMode(FlushMode.AUTO); 
 
-						session.update(((Message)obj)); 
+						session.update((obj)); 
 
 						session.flush(); 
 
@@ -54,6 +51,7 @@ public class MessageDaoImpl extends BasicOperationImpl implements MessageDao{
 	    //this.getHibernateTemplate().delete(nt);
 		this.getHibernateTemplate().execute(
 				new HibernateCallback() {
+					@Override
 					public Object doInHibernate(Session session) throws HibernateException, SQLException {
 						session.setFlushMode(FlushMode.AUTO);
 						session.beginTransaction();

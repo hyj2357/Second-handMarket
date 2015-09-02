@@ -7,6 +7,7 @@ public class CheckGoodAction extends ActionSupport{
 	private int gid;
 	private GoodModule goodModule;
 	
+	@Override
 	public String execute(){
 		this.goodModule.checkGoodInfo(gid);
 		return SUCCESS;

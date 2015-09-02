@@ -7,6 +7,7 @@ public class CheckGoodCommentsAction extends ActionSupport{
 	private int gid;
 	private GoodModule goodModule;
 	
+	@Override
 	public String execute(){
 		this.goodModule.checkGoodComments(gid);
 		return SUCCESS;

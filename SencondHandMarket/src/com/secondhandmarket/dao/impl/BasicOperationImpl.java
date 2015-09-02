@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.secondhandmarket.domain.BuyerRecord;
 import com.secondhandmarket.tools.Args;
 import com.secondhandmarket.tools.HQLSelectTools;
 

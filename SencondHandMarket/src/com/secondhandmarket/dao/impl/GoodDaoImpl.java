@@ -8,17 +8,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import com.secondhandmarket.dao.interf.GoodDao;
-import com.secondhandmarket.domain.BuyerRecord;
 import com.secondhandmarket.domain.Good;
 
 public class GoodDaoImpl extends BasicOperationImpl implements GoodDao{
 
 	@Override
 	public boolean create(Object obj) {
-	    this.getHibernateTemplate().save( ((Good)obj) );
+	    this.getHibernateTemplate().save( (obj) );
 		return true;
 	}
 
@@ -29,12 +26,13 @@ public class GoodDaoImpl extends BasicOperationImpl implements GoodDao{
 		this.getHibernateTemplate().execute(
 				new HibernateCallback() {
 
+					@Override
 					public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
 
 						session.setFlushMode(FlushMode.AUTO); 
 
-						session.update(((Good)obj)); 
+						session.update((obj)); 
 
 						session.flush(); 
 
@@ -50,6 +48,7 @@ public class GoodDaoImpl extends BasicOperationImpl implements GoodDao{
 	    //this.getHibernateTemplate().delete(nt);
 		this.getHibernateTemplate().execute(
 				new HibernateCallback() {
+					@Override
 					public Object doInHibernate(Session session) throws HibernateException, SQLException {
 						session.setFlushMode(FlushMode.AUTO);
 						session.beginTransaction();

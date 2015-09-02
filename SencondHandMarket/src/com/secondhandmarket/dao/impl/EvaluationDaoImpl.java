@@ -8,16 +8,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import com.secondhandmarket.dao.interf.EvaluationDao;
-import com.secondhandmarket.domain.Customer;
 import com.secondhandmarket.domain.Evaluation;
 
 public class EvaluationDaoImpl extends BasicOperationImpl implements EvaluationDao{
 
+	@Override
 	public boolean create(Object obj) {
-	    this.getHibernateTemplate().save( ((Evaluation)obj) );
+	    this.getHibernateTemplate().save( (obj) );
 		return true;
 	}
 
@@ -28,12 +26,13 @@ public class EvaluationDaoImpl extends BasicOperationImpl implements EvaluationD
 		this.getHibernateTemplate().execute(
 				new HibernateCallback() {
 
+					@Override
 					public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
 
 						session.setFlushMode(FlushMode.AUTO); 
 
-						session.update(((Evaluation)obj)); 
+						session.update((obj)); 
 
 						session.flush(); 
 
@@ -49,6 +48,7 @@ public class EvaluationDaoImpl extends BasicOperationImpl implements EvaluationD
 	    //this.getHibernateTemplate().delete(nt);
 		this.getHibernateTemplate().execute(
 				new HibernateCallback() {
+					@Override
 					public Object doInHibernate(Session session) throws HibernateException, SQLException {
 						session.setFlushMode(FlushMode.AUTO);
 						session.beginTransaction();

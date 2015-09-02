@@ -10,6 +10,7 @@ public class CheckCustomerInfoAction extends ActionSupport{
 	private UserAdModule userAdModule;
 	
 	
+	@Override
 	public String execute(){
 		Customer cs = this.userAdModule.checkCustomerInfo(name);
 		user_confirm = cs.getConfirm()==0?"false":"true";

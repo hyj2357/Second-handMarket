@@ -8,7 +8,8 @@ public class OfflineGoodAction extends ActionSupport{
      private String upload="false";
      private SalerAdModule salerAdModule;
      
-     public String execute(){
+     @Override
+	public String execute(){
     	 upload = this.salerAdModule.offlineGood(gid)?"false":"true";
     	 return SUCCESS;
      }

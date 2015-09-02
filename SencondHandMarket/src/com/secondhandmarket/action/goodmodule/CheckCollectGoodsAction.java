@@ -4,13 +4,13 @@ import java.util.List;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.secondhandmarket.service.GoodModule;
-import com.secondhandmarket.service.UserAdModule;
 
 public class CheckCollectGoodsAction extends ActionSupport{
 	private String name;
 	private GoodModule goodModule;
 	private List goodList;
 	
+	@Override
 	public String execute(){
 		goodList = this.goodModule.checkCollectGoods(name);
 		return SUCCESS;

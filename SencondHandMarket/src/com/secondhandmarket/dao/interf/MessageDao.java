@@ -1,8 +1,5 @@
 package com.secondhandmarket.dao.interf;
 
-import java.sql.Timestamp;
-import java.util.List;
-
 import com.secondhandmarket.domain.Customer;
 import com.secondhandmarket.domain.Message;
 

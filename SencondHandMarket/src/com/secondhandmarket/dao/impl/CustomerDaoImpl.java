@@ -8,19 +8,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import com.secondhandmarket.dao.interf.CustomerDao;
-import com.secondhandmarket.domain.BuyerRecord;
 import com.secondhandmarket.domain.Customer;
-import com.secondhandmarket.tools.Args;
-import com.secondhandmarket.tools.HQLSelectTools;
 
 public class CustomerDaoImpl extends BasicOperationImpl implements CustomerDao{
 
 	@Override
 	public boolean create(Object obj) {
-	    this.getHibernateTemplate().save( ((Customer)obj) );
+	    this.getHibernateTemplate().save( (obj) );
 		return true;
 	}
 
@@ -31,12 +26,13 @@ public class CustomerDaoImpl extends BasicOperationImpl implements CustomerDao{
 		this.getHibernateTemplate().execute(
 				new HibernateCallback() {
 
+					@Override
 					public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
 
 						session.setFlushMode(FlushMode.AUTO); 
 
-						session.update(((Customer)obj)); 
+						session.update((obj)); 
 
 						session.flush(); 
 
@@ -52,6 +48,7 @@ public class CustomerDaoImpl extends BasicOperationImpl implements CustomerDao{
 	    //this.getHibernateTemplate().delete(nt);
 		this.getHibernateTemplate().execute(
 				new HibernateCallback() {
+					@Override
 					public Object doInHibernate(Session session) throws HibernateException, SQLException {
 						session.setFlushMode(FlushMode.AUTO);
 						session.beginTransaction();
@@ -87,9 +84,9 @@ public class CustomerDaoImpl extends BasicOperationImpl implements CustomerDao{
         Integer authority = isSuper==0?new Integer(5):new Integer(3);
         List ls = this.find(new String[]{"cid"}, 
         		            new String[]{"customer"}, 
-        		            new String[]{this.ALIAS}, 
-        		            this.COLUMNS, 
-        		            this.CLASSNAME, 
+        		            new String[]{CustomerDao.ALIAS}, 
+        		            CustomerDao.COLUMNS, 
+        		            CustomerDao.CLASSNAME, 
         		            new Object[]{null,null,null,null,null,null,null,null,authority});
 		int id = (int)(Math.random()*ls.size());
         return (Customer)ls.get(id-1);

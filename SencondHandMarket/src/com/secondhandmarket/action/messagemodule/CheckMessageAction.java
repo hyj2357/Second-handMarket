@@ -7,7 +7,8 @@ public class CheckMessageAction extends ActionSupport{
       private int mid;
       private MessageModule messageModule;
       
-      public String execute(){
+      @Override
+	public String execute(){
     	  this.messageModule.checkMessage(mid);
     	  return SUCCESS;
       }

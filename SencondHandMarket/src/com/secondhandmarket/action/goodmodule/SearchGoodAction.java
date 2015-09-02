@@ -9,7 +9,8 @@ public class SearchGoodAction extends ActionSupport{
       private int isOnline;
       private GoodModule goodModule;
       
-      public String execute(){
+      @Override
+	public String execute(){
     	  this.goodModule.searchGood(price, intro, isOnline, category);
     	  return SUCCESS;
       }

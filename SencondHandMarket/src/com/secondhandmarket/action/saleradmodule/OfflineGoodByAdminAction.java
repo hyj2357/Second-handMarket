@@ -8,7 +8,8 @@ public class OfflineGoodByAdminAction extends ActionSupport{
      private String reason;
      private SalerAdModule salerAdModule;
      
-     public String execute(){
+     @Override
+	public String execute(){
     	 this.salerAdModule.offlineGoodByAdmin(gid, aid, reason);
     	 return SUCCESS;
      }

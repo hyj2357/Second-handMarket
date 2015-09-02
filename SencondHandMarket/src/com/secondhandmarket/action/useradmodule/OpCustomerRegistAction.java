@@ -7,7 +7,8 @@ public class OpCustomerRegistAction extends ActionSupport{
       private int cid, aid, op;
       private UserAdModule userAdModule;
       
-      public String execute(){
+      @Override
+	public String execute(){
     	  this.userAdModule.opCustomerRegist(cid, aid, op);
     	  return SUCCESS;
       }

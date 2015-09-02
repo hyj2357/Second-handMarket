@@ -10,6 +10,7 @@ public class CheckGoodsByClassAction extends ActionSupport{
 	private GoodModule goodModule;
 	private List goodList;
 	
+	@Override
 	public String execute(){
 		this.goodList = this.goodModule.checkGoodsByClass(category);
 	    return SUCCESS;

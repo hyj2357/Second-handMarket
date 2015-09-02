@@ -1,22 +1,15 @@
 package com.secondhandmarket.dao.impl;
 
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.HibernateTemplate;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import com.secondhandmarket.dao.interf.BuyerRecordDao;
 import com.secondhandmarket.domain.BuyerRecord;
-import com.secondhandmarket.tools.Args;
-import com.secondhandmarket.tools.HQLSelectTools;
 
 public class BuyerRecordDaoImpl extends BasicOperationImpl implements BuyerRecordDao {
 
@@ -33,7 +26,7 @@ public class BuyerRecordDaoImpl extends BasicOperationImpl implements BuyerRecor
 
 	@Override
 	public boolean create(Object obj) {
-	    this.getHibernateTemplate().save( ((BuyerRecord)obj) );
+	    this.getHibernateTemplate().save( (obj) );
 		return true;
 	}
 
@@ -44,12 +37,13 @@ public class BuyerRecordDaoImpl extends BasicOperationImpl implements BuyerRecor
 		this.getHibernateTemplate().execute(
 				new HibernateCallback() {
 
+					@Override
 					public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
 
 						session.setFlushMode(FlushMode.AUTO); 
 
-						session.update(((BuyerRecord)obj)); 
+						session.update((obj)); 
 
 						session.flush(); 
 
@@ -65,6 +59,7 @@ public class BuyerRecordDaoImpl extends BasicOperationImpl implements BuyerRecor
 	    //this.getHibernateTemplate().delete(nt);
 		this.getHibernateTemplate().execute(
 				new HibernateCallback() {
+					@Override
 					public Object doInHibernate(Session session) throws HibernateException, SQLException {
 						session.setFlushMode(FlushMode.AUTO);
 						session.beginTransaction();

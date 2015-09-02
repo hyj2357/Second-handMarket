@@ -1,13 +1,13 @@
 package com.secondhandmarket.action.ordermodule;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.secondhandmarket.service.MessageModule;
 import com.secondhandmarket.service.OrderModule;
 
 public class CheckGetOrderAction extends ActionSupport{
 	private int salerId;
 	private OrderModule orderModule;
 	
+	@Override
 	public String execute(){
 		this.orderModule.checkGetOrder(salerId);
 		return SUCCESS;

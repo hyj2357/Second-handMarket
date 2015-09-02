@@ -1,7 +1,5 @@
 package com.secondhandmarket.dao.interf;
 
-import java.util.List;
-
 import com.secondhandmarket.domain.Customer;
 
 public interface CustomerDao extends BasicDao{

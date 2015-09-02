@@ -8,6 +8,7 @@ public class ReplyComplainMessageAction extends ActionSupport{
 	private String title,content;
 	private MessageModule messageModule;
 	
+	@Override
 	public String execute(){
 		this.messageModule.replyComplainMessage(sender, receiver, title, content);
 		return SUCCESS;

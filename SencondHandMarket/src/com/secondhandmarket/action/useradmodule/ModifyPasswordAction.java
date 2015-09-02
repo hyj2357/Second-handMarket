@@ -8,7 +8,8 @@ public class ModifyPasswordAction extends ActionSupport{
      private String password, newPassword;
      private UserAdModule userAdModule;
      
-     public String execute(){
+     @Override
+	public String execute(){
     	 this.userAdModule.modifyPassword(cid, password, newPassword);
     	 return SUCCESS;
      }
