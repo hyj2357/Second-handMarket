@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!-- 指定Hiberante3映射文件的DTD信息 -->
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--上面四行对所有的hibernate映射文件都相同 -->
+<!-- hibernate-mapping是映射文件的根元素 -->
+<hibernate-mapping package="com.secondhandmarket.domain" default-lazy="true">
+   <class name="Collection" table="collection" >
+      <id name="clid" ><generator class="identity"/></id>   
+      <property name="gname" type="string" length="32"/>
+      
+      <many-to-one name="cs" class="Customer" column="cid"/>
+      <many-to-one name="gd" class="Good" column="gid"/>                  
+   </class>
+</hibernate-mapping>

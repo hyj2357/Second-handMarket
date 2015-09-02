@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!-- 指定Hiberante3映射文件的DTD信息 -->
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--上面四行对所有的hibernate映射文件都相同 -->
+<!-- hibernate-mapping是映射文件的根元素 -->
+<hibernate-mapping package="com.secondhandmarket.domain" default-lazy="true">
+   <class name="Customer" table="customer" >
+      <id name="cid" ><generator class="identity"/></id>
+      <property name="name" type="string" length="10"/>
+      <property name="password" type="string" length="32"/>
+      <property name="province" type="string" length="3"/>
+      <property name="city" type="string" length="10"/>
+      <property name="area" type="string" length="32"/>
+      <property name="school" type="string" length="32"/>
+      <property name="phonenumber" type="string" length="11"/>
+      <property name="authority" type="int" length="2"/>
+      <property name="qqnumber" type="string" length="32"/>
+      <property name="confirm" type="int" length="2"/>
+      
+      <set name="evaluations" inverse="true" cascade="all">
+         <key column="cid"/>
+         <one-to-many class="Evaluation"/>
+      </set> 
+      
+      <set name="goods" inverse="true" cascade="all">
+         <key column="posterId"/>
+         <one-to-many class="Good"/>
+      </set> 
+      
+      <set name="messages_receive" inverse="true" cascade="all">
+         <key column="receiver"/>
+         <one-to-many class="Message"/>
+      </set> 
+      
+      <set name="messages_send" inverse="true" cascade="all">
+         <key column="sender"/>
+         <one-to-many class="Message"/>
+      </set> 
+ 
+      <set name="buyerRecords_buy" inverse="true" cascade="all">
+         <key column="buyerId"/>
+         <one-to-many class="BuyerRecord"/>
+      </set> 
+ 
+      <set name="buyerRecords_sale" inverse="true" cascade="all">
+         <key column="salerId"/>
+         <one-to-many class="BuyerRecord"/>
+      </set> 
+      
+      <set name="collections" inverse="true" cascade="all">
+         <key column="cid"/>
+         <one-to-many class="Collection"/>
+      </set> 
+                 
+     </class>
+</hibernate-mapping>

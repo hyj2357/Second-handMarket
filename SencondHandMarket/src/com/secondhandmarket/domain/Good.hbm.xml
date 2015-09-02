@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!-- 指定Hiberante3映射文件的DTD信息 -->
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--上面四行对所有的hibernate映射文件都相同 -->
+<!-- hibernate-mapping是映射文件的根元素 -->
+<hibernate-mapping package="com.secondhandmarket.domain" default-lazy="true">
+   <class name="Good" table="good" >
+      <id name="gid" ><generator class="identity"/></id>
+      <property name="price" type="float"/>
+      <property name="intro" type="string" length="100"/>
+      <property name="isOnline" type="int" length="2"/>
+      <property name="category" type="string" length="32"/>
+      <property name="gname" type="string" length="32"/>
+      
+      <many-to-one name="poster" class="Customer" column="posterId"/>
+      
+      <set name="mordersSet" inverse="true" cascade="all">
+         <key column="gid"/>
+         <one-to-many class="MOrder"/>
+      </set>     
+      <set name="buyerRecordsSet" inverse="true" cascade="all">
+         <key column="gid"/>
+         <one-to-many class="BuyerRecord"/>
+      </set>     
+      <set name="collectionsSet" inverse="true" cascade="all">
+         <key column="gid"/>
+         <one-to-many class="Collection"/>
+      </set> 
+   </class>
+</hibernate-mapping>

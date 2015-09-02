@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    
+    <bean id="daoConfigTemplate" abstract="true" lazy-init="true">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <!-- 配置Dao层组件  -->
+    <bean id="buyerRecordDao" class="com.secondhandmarket.dao.impl.BuyerRecordDaoImpl" parent="daoConfigTemplate"/>
+    <bean id="collectionDao" class="com.secondhandmarket.dao.impl.CollectionDaoImpl" parent="daoConfigTemplate"/> 
+    <bean id="customerDao" class="com.secondhandmarket.dao.impl.CustomerDaoImpl" parent="daoConfigTemplate"/> 
+    <bean id="evaluationDao" class="com.secondhandmarket.dao.impl.EvaluationDaoImpl" parent="daoConfigTemplate"/> 
+    <bean id="goodDao" class="com.secondhandmarket.dao.impl.GoodDaoImpl" parent="daoConfigTemplate"/> 
+    <bean id="messageDao" class="com.secondhandmarket.dao.impl.MessageDaoImpl" parent="daoConfigTemplate"/> 
+    <bean id="morderDao" class="com.secondhandmarket.dao.impl.MOrderDaoImpl" parent="daoConfigTemplate"/> 
+</beans>

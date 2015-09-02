@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!DOCTYPE struts  PUBLIC 
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd" >
+
+
+<struts>
+   
+
+    <include file="struts-part1.xml"/>
+	
+    <constant name="struts.devMode" value="false"/>
+    
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+    
+    <package name="scuthnweb" extends="json-default" namespace="/">
+       
+    <action name="ComplainGoodAction" class="ComplainGoodAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			 ^upload
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>
+	
+	<action name="RegistUserAction" class="RegistUserAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			 ^user_registered,
+			 ^user_name_conflict
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>
+	
+	<action name="ComplainAdminAction" class="ComplainAdminAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			 ^upload
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>
+	
+	<action name="ModifyCustomerInfoAction" class="ModifyCustomerInfoAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			 ^upload
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>
+	
+	<action name="CollectGoodAction" class="CollectGoodAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			 ^upload
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>
+	
+	<action name="SearchGoodByPosterAction" class="SearchGoodByPosterAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			^goodList\[\d+\]\.*\.gname,
+			^goodList\[\d+\]\.*\.intro,
+			^goodList\[\d+\]\.*\.gid			
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>	
+	
+	<action name="OfflineGoodAction" class="OfflineGoodAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			 ^upload
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>
+	
+	<action name="PostGoodAction" class="PostGoodAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			 ^upload
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>
+	
+	<action name="ModifyGoodInfoAction" class="ModifyGoodInfoAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			 ^upload
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>	
+	
+	<action name="login" class="LoginAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			 ^user_registered,
+			 ^logged
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>	
+	
+	<action name="check_user_information" class="CheckCustomerInfoAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			 ^user_id,
+			 ^user_school,
+			 ^user_phonenum,
+			 ^user_qqnum,
+			 ^user_confirm
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>
+	
+	<action name="check_user_collection" class="CheckCollectGoodsAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			^goodList\[\d+\]\.*\.gname,
+			^goodList\[\d+\]\.*\.intro,
+			^goodList\[\d+\]\.*\.gid
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>
+	
+	<action name="check_item_byClass" class="CheckGoodsByClassAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			^goodList\[\d+\]\.*\.gname,
+			^goodList\[\d+\]\.*\.poster\.name,			
+			^goodList\[\d+\]\.*\.price,
+			^goodList\[\d+\]\.*\.gid
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>
+	
+	<action name="check_item_detail" class="CheckGoodAction">
+      <result name="success" type="json">
+		 <param name="includeProperties">
+			^goodList\[\d+\]\.*\.gname,
+			^goodList\[\d+\]\.*\.price,			
+			^goodList\[\d+\]\.*\.poster\.name,			
+			^goodList\[\d+\]\.*\.poster\.school,
+			^goodList\[\d+\]\.*\.poster\.intro,	
+			^goodList\[\d+\]\.*\.poster\.phonenumber,	
+			^goodList\[\d+\]\.*\.poster\.qqnumber,						
+		 </param>
+	  </result>                  	       	   	   	   	   	   
+	</action>
+				
+    </package>   
+</struts>

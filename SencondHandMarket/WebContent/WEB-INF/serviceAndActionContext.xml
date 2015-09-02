@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    
+	<!-- 使用静态工厂方法实例化 ActionContext -->
+	<bean id="actionContext" class="com.opensymphony.xwork2.ActionContext" factory-method="getContext"/>
+	  	  
+    <!-- 配置业务逻辑层组件  -->
+	<bean id="customerAdModule" class="com.secondhandmarket.service.impl.CustomerAdModuleImpl">
+	    <property name="customerDao" ref="customerDao"/>
+	    <property name="evaluationDao" ref="evaluationDao"/>
+	    <property name="goodDao" ref="goodDao"/>
+	    <property name="messageDao" ref="messageDao"/>
+	    <property name="morderDao" ref="morderDao"/>	    
+	</bean>
+	
+	<bean id="goodModule" class="com.secondhandmarket.service.impl.GoodModuleImpl">
+		<property name="collectionDao" ref="collectionDao"/>
+		<property name="customerDao" ref="customerDao"/>	    	
+		<property name="evaluationDao" ref="evaluationDao"/>	    	
+		<property name="goodDao" ref="goodDao"/>	    				    	
+	</bean>
+
+	<bean id="messageModule" class="com.secondhandmarket.service.impl.MessageModuleImpl">
+		<property name="customerDao" ref="customerDao"/>	    				    	
+		<property name="messageDao" ref="messageDao"/>	    				    	
+	</bean>
+
+	<bean id="orderModule" class="com.secondhandmarket.service.impl.OrderModuleImpl">
+		<property name="customerDao" ref="customerDao"/>	    				    	
+		<property name="goodDao" ref="goodDao"/>	    				    	
+		<property name="messageDao" ref="messageDao"/>	    				    	
+		<property name="morderDao" ref="morderDao"/>	    				    	
+	</bean>
+
+	<bean id="salerAdModule" class="com.secondhandmarket.service.impl.SalerAdModuleImpl">
+		<property name="customerDao" ref="customerDao"/>	    				    	
+		<property name="goodDao" ref="goodDao"/>	    				    	
+		<property name="messageDao" ref="messageDao"/>	    				    	
+	</bean>
+
+	<bean id="userAdModule" class="com.secondhandmarket.service.impl.UserAdModuleImpl">
+		<property name="customerDao" ref="customerDao"/>	    				    	
+		<property name="messageDao" ref="messageDao"/>	    				    	
+	</bean>
+			
+	<!-- 配置action -->	  
+	<!-- CustomerAdModule -->
+	 <bean id="CustomerAdModuleTemplate" abstract="true" lazy-init="true">
+        <property name="customerAdModule" ref="customerAdModule"/>
+     </bean>
+    
+     <bean id="ComplainGoodAction" class="com.secondhandmarket.action.customeradmodule.ComplainGoodAction" parent="CustomerAdModuleTemplate"/> 	
+	<!-- end CustomerAdModule --> 
+	 
+	<!-- UserAdModule -->
+	 <bean id="UserAdModuleTemplate" abstract="true" lazy-init="true">
+        <property name="userAdModule" ref="userAdModule"/>
+     </bean>
+    
+	 <bean id="RegistUserAction" class="com.secondhandmarket.action.useradmodule.RegistUserAction" parent="UserAdModuleTemplate"/> 		
+	 <bean id="ComplainAdminAction" class="com.secondhandmarket.action.useradmodule.ComplainAdminAction" parent="UserAdModuleTemplate"/> 		
+	 <bean id="ModifyCustomerInfoAction" class="com.secondhandmarket.action.useradmodule.ModifyCustomerInfoAction" parent="UserAdModuleTemplate"/> 			
+	 <bean id="LoginAction" class="com.secondhandmarket.action.useradmodule.LoginAction" parent="UserAdModuleTemplate"/> 			
+	 <bean id="CheckCustomerInfoAction" class="com.secondhandmarket.action.useradmodule.CheckCustomerInfoAction" parent="UserAdModuleTemplate"/> 			
+	<!-- end UserAdModule -->
+	
+	<!-- GoodModule -->
+	 <bean id="GoodModuleTemplate" abstract="true" lazy-init="true">
+        <property name="goodModule" ref="goodModule"/>
+     </bean>     
+     <bean id="CollectGoodAction" class="com.secondhandmarket.action.goodmodule.CollectGoodAction" parent="GoodModuleTemplate"/> 		
+	 <bean id="SearchGoodByPosterAction" class="com.secondhandmarket.action.goodmodule.SearchGoodByPosterAction" parent="GoodModuleTemplate"/> 		
+     <bean id="CheckCollectGoodsAction" class="com.secondhandmarket.action.goodmodule.CheckCollectGoodsAction" parent="GoodModuleTemplate"/> 		
+	 <bean id="CheckGoodsByClassAction" class="com.secondhandmarket.action.goodmodule.CheckGoodsByClassAction" parent="GoodModuleTemplate"/> 		
+	 <bean id="CheckGoodAction" class="com.secondhandmarket.action.goodmodule.CheckGoodAction" parent="GoodModuleTemplate"/> 		
+	<!-- end goodModule -->	 
+	
+	<!-- SalerAdModule -->	 
+	 <bean id="SalerAdModuleTemplate" abstract="true" lazy-init="true">
+        <property name="salerAdModule" ref="salerAdModule"/>
+     </bean>
+ 	
+     <bean id="OfflineGoodAction" class="com.secondhandmarket.action.saleradmodule.OfflineGoodAction" parent="SalerAdModuleTemplate"/> 		
+	 <bean id="PostGoodAction" class="com.secondhandmarket.action.saleradmodule.PostGoodAction" parent="SalerAdModuleTemplate"/> 		
+	 <bean id="ModifyGoodInfoAction" class="com.secondhandmarket.action.saleradmodule.ModifyGoodInfoAction" parent="SalerAdModuleTemplate"/> 		
+	<!-- end SalerAdModule -->	 	
+</beans>

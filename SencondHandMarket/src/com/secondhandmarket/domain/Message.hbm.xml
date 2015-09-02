@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!-- 指定Hiberante3映射文件的DTD信息 -->
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--上面四行对所有的hibernate映射文件都相同 -->
+<!-- hibernate-mapping是映射文件的根元素 -->
+<hibernate-mapping package="com.secondhandmarket.domain" default-lazy="true">
+   <class name="Message" table="message" >
+      <id name="mid" ><generator class="identity"/></id>
+      <property name="title" type="string" length="10"/>
+      <property name="content" type="string" length="100"/>
+      <property name="mstime" type="timestamp"/>
+      <property name="category" type="int" length="2"/>
+      
+      <many-to-one name="sender" class="Customer" column="sender"/>
+      <many-to-one name="receiver" class="Customer" column="receiver"/>
+   </class>
+</hibernate-mapping>
