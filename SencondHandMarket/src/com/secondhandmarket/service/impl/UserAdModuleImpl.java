@@ -93,7 +93,7 @@ public class UserAdModuleImpl implements UserAdModule{
 	@Override
 	public Map<String, Object[]> checkCustomersRegist() {
         List ls = this.customerDao.find(null, 
-        		                        new String[]{"customer"}, 
+        		                        new String[]{"Customer"}, 
         		                        new String[]{CustomerDao.ALIAS}, 
         		                        CustomerDao.COLUMNS, 
         		                        CustomerDao.CLASSNAME, 

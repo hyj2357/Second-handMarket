@@ -83,7 +83,7 @@ public class SalerAdModuleImpl implements SalerAdModule{
 	@Override
 	public Map<String, Object[]> checkPostGoodList(int posterId) {
         List ls = this.goodDao.find(null, 
-        		                    new String[]{"good"}, 
+        		                    new String[]{"Good"}, 
         		                    new String[]{GoodDao.ALIAS}, 
         		                    GoodDao.COLUMNS, 
         		                    GoodDao.CLASSNAME, 
@@ -96,7 +96,7 @@ public class SalerAdModuleImpl implements SalerAdModule{
 		Integer isOnline = isAdmin==0?null:new Integer(1);   //如果为管理员查看，则查看所有商品，包括未上线商品
 		
         List ls = this.goodDao.find(null, 
-                new String[]{"good"}, 
+                new String[]{"Good"}, 
                 new String[]{GoodDao.ALIAS}, 
                 GoodDao.COLUMNS, 
                 GoodDao.CLASSNAME, 

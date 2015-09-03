@@ -15,7 +15,7 @@ public class MessageModuleImpl implements MessageModule{
 	@Override
 	public Map<String, Object[]> checkNormalMessage(int receiver) {
         List ls = this.messageDao.find(null, 
-        		                       new String[]{"message"}, 
+        		                       new String[]{"Message"}, 
         		                       new String[]{MessageDao.ALIAS}, 
         		                       MessageDao.COLUMNS, 
         		                       MessageDao.CLASSNAME, 
@@ -26,7 +26,7 @@ public class MessageModuleImpl implements MessageModule{
 	@Override
 	public Map<String, Object[]> checkComplainMessage(int receiver) {
         List ls = this.messageDao.find(null, 
-                new String[]{"message"}, 
+                new String[]{"Message"}, 
                 new String[]{MessageDao.ALIAS}, 
                 MessageDao.COLUMNS, 
                 MessageDao.CLASSNAME, 

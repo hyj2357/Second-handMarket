@@ -23,7 +23,7 @@ public class GoodModuleImpl implements GoodModule{
 	@Override
 	public Map<String, Object[]> searchGood(float price, String intro,int isOnline, String category) {
 		List ls = this.goodDao.find(null, 
-				                    new String[]{"good"}, 
+				                    new String[]{"Good"}, 
 				                    new String[]{GoodDao.ALIAS}, 
 				                    GoodDao.COLUMNS, 
 				                    GoodDao.CLASSNAME, 
@@ -35,7 +35,7 @@ public class GoodModuleImpl implements GoodModule{
 	public List searchGoodByPoster(String poster) {
 		Customer cs = this.customerDao.findCidByName(poster);
 		List ls = this.goodDao.find(null, 
-				                    new String[]{"good"}, 
+				                    new String[]{"Good"}, 
 				                    new String[]{GoodDao.ALIAS}, 
 				                    GoodDao.COLUMNS, 
 				                    GoodDao.CLASSNAME, 
@@ -51,7 +51,7 @@ public class GoodModuleImpl implements GoodModule{
 	@Override
 	public Map<String, Evaluation> checkGoodComments(int gid) {
         List ls = this.evaluationDao.find(null, 
-        		                          new String[]{"evaluation"}, 
+        		                          new String[]{"Evaluation"}, 
         		                          new String[]{EvaluationDao.ALIAS}, 
         		                          EvaluationDao.COLUMNS, 
         		                          EvaluationDao.CLASSNAME, 
@@ -110,14 +110,14 @@ public class GoodModuleImpl implements GoodModule{
         Customer cs  = this.customerDao.findCidByName(name);
         List goodList = new ArrayList<Good>();
         List<Object> ls = this.collectionDao.find(null, 
-        		                new String[]{"collection"}, 
+        		                new String[]{"Collection"}, 
         		                new String[]{CollectionDao.ALIAS}, 
         		                CollectionDao.COLUMNS, 
         		                CollectionDao.CLASSNAME, 
         		                new Object[]{null,new Integer(cs.getCid()),null});
         for(Object gd:ls){
         	Good g = (Good)this.goodDao.find(null, 
-        			                   new String[]{"good"}, 
+        			                   new String[]{"Good"}, 
         			                   new String[]{GoodDao.ALIAS}, 
         			                   GoodDao.COLUMNS, 
         			                   GoodDao.CLASSNAME, 
@@ -129,8 +129,16 @@ public class GoodModuleImpl implements GoodModule{
 
 	@Override
 	public List checkGoodsByClass(String category) {
+		if(category.equals("all")){
+			return this.goodDao.find(null, 
+                    new String[]{"Good"}, 
+                    new String[]{GoodDao.ALIAS}, 
+                    GoodDao.COLUMNS, 
+                    GoodDao.CLASSNAME, 
+                    new Object[]{null,null,null,null,null,null});
+		};
         List ls = this.goodDao.find(null, 
-        		                    new String[]{"good"}, 
+        		                    new String[]{"Good"}, 
         		                    new String[]{GoodDao.ALIAS}, 
         		                    GoodDao.COLUMNS, 
         		                    GoodDao.CLASSNAME, 

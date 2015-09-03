@@ -56,7 +56,7 @@ public class OrderModuleImpl implements OrderModule{
 	@Override
 	public Map<String, Object[]> checkGetOrder(int salerId) {
         List ls = morderDao.find(null, 
-        		                 new String[]{"morder"}, 
+        		                 new String[]{"MOrder"}, 
                                  new String[]{MOrderDao.ALIAS}, 
                                  MOrderDao.COLUMNS, 
                                  MOrderDao.CLASSNAME, 
@@ -72,7 +72,7 @@ public class OrderModuleImpl implements OrderModule{
 	@Override
 	public Map<String, Object[]> checkSendOrder(int buyerId) {
         List ls = morderDao.find(null, 
-                                 new String[]{"morder"}, 
+                                 new String[]{"MOrder"}, 
                                  new String[]{MOrderDao.ALIAS}, 
                                  MOrderDao.COLUMNS, 
                                  MOrderDao.CLASSNAME, 
