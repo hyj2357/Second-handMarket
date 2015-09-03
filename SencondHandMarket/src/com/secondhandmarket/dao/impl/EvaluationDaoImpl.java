@@ -66,7 +66,7 @@ public class EvaluationDaoImpl extends BasicOperationImpl implements EvaluationD
 
 	@Override
 	public Evaluation findByEid(int eid) {
-        String hql = "from evaluation e where e.eid=?";
+        String hql = "from Evaluation e where e.eid=?";
         List ls = this.getHibernateTemplate().find(hql, new Object[]{eid});
 		return ls.size()==0?null:(Evaluation)ls.get(0);
 	}

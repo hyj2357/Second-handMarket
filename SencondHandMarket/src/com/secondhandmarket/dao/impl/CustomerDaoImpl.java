@@ -66,14 +66,14 @@ public class CustomerDaoImpl extends BasicOperationImpl implements CustomerDao{
 
 	@Override
 	public Customer findCidByName(String name) {
-        String hql = "from customer cs where cs.name=?";
+        String hql = "from Customer cs where cs.name=?";
         List ls = this.getHibernateTemplate().find(hql, new Object[]{name});
         return ls.size()==0?null:(Customer)ls.get(0);
 	}
 	
 	@Override
 	public Customer findCustomerByCid(int cid){
-		String hql = "from customer cs where cs.cid=?";
+		String hql = "from Customer cs where cs.cid=?";
 		List ls = this.getHibernateTemplate().find(hql, new Object[]{cid});
 		return ls.size()==0?null:(Customer)ls.get(0);
 	}
@@ -83,12 +83,14 @@ public class CustomerDaoImpl extends BasicOperationImpl implements CustomerDao{
         String hql = "";
         Integer authority = isSuper==0?new Integer(5):new Integer(3);
         List ls = this.find(new String[]{"cid"}, 
-        		            new String[]{"customer"}, 
+        		            new String[]{"Customer"}, 
         		            new String[]{CustomerDao.ALIAS}, 
         		            CustomerDao.COLUMNS, 
         		            CustomerDao.CLASSNAME, 
         		            new Object[]{null,null,null,null,null,null,null,null,authority});
-		int id = (int)(Math.random()*ls.size());
+		if(ls.size()==0)
+			return null;
+        int id = (int)(Math.random()*ls.size());
         return (Customer)ls.get(id-1);
 	}
 }

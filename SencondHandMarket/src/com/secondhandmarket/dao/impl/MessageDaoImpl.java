@@ -69,7 +69,7 @@ public class MessageDaoImpl extends BasicOperationImpl implements MessageDao{
 
 	@Override
 	public Message findByMid(int mid) {
-        String hql = "from message ms where ms.mid=?";
+        String hql = "from Message ms where ms.mid=?";
         List ls = this.getHibernateTemplate().find(hql, new Object[]{mid});
 		return ls.size()==0?null:(Message)ls.get(0);
 	}

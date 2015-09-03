@@ -31,13 +31,13 @@ CREATE TABLE `buyerRecord` (
   `buyerId` int(11) DEFAULT NULL,
   `salerId` int(11) DEFAULT NULL,
   PRIMARY KEY (`bid`),
-  KEY `FKD57E07E42236FBD4` (`buyerId`),
-  KEY `FKD57E07E482A8CD2C` (`salerId`),
-  KEY `FKD57E07E419E85267` (`gid`),
-  CONSTRAINT `FKD57E07E419E85267` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`),
-  CONSTRAINT `FKD57E07E42236FBD4` FOREIGN KEY (`buyerId`) REFERENCES `Customer` (`cid`),
-  CONSTRAINT `FKD57E07E482A8CD2C` FOREIGN KEY (`salerId`) REFERENCES `Customer` (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `FKD57E07E4F2EE4FB4` (`buyerId`),
+  KEY `FKD57E07E45360210C` (`salerId`),
+  KEY `FKD57E07E4AC249647` (`gid`),
+  CONSTRAINT `FKD57E07E4AC249647` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`),
+  CONSTRAINT `FKD57E07E45360210C` FOREIGN KEY (`salerId`) REFERENCES `customer` (`cid`),
+  CONSTRAINT `FKD57E07E4F2EE4FB4` FOREIGN KEY (`buyerId`) REFERENCES `customer` (`cid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,11 +62,11 @@ CREATE TABLE `collection` (
   `cid` int(11) DEFAULT NULL,
   `gid` int(11) DEFAULT NULL,
   PRIMARY KEY (`clid`),
-  KEY `FK9835AE9E19E85267` (`gid`),
-  KEY `FK9835AE9E13960E84` (`cid`),
-  CONSTRAINT `FK9835AE9E13960E84` FOREIGN KEY (`cid`) REFERENCES `Customer` (`cid`),
-  CONSTRAINT `FK9835AE9E19E85267` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `FK9835AE9EAC249647` (`gid`),
+  KEY `FK9835AE9EE44D6264` (`cid`),
+  CONSTRAINT `FK9835AE9EE44D6264` FOREIGN KEY (`cid`) REFERENCES `customer` (`cid`),
+  CONSTRAINT `FK9835AE9EAC249647` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,8 +96,9 @@ CREATE TABLE `customer` (
   `phonenumber` varchar(11) DEFAULT NULL,
   `authority` int(11) DEFAULT NULL,
   `qqnumber` varchar(32) DEFAULT NULL,
+  `confirm` int(11) DEFAULT NULL,
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +107,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `customer` VALUES (1,'234234','2342',NULL,NULL,NULL,'就开始地方','三大',0,'服务考核',0);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,11 +124,11 @@ CREATE TABLE `evaluation` (
   `cid` int(11) DEFAULT NULL,
   `gid` int(11) DEFAULT NULL,
   PRIMARY KEY (`eid`),
-  KEY `FK332C073C19E85267` (`gid`),
-  KEY `FK332C073C13960E84` (`cid`),
-  CONSTRAINT `FK332C073C13960E84` FOREIGN KEY (`cid`) REFERENCES `Customer` (`cid`),
-  CONSTRAINT `FK332C073C19E85267` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `FK332C073CAC249647` (`gid`),
+  KEY `FK332C073CE44D6264` (`cid`),
+  CONSTRAINT `FK332C073CE44D6264` FOREIGN KEY (`cid`) REFERENCES `customer` (`cid`),
+  CONSTRAINT `FK332C073CAC249647` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,12 +153,12 @@ CREATE TABLE `good` (
   `intro` varchar(100) DEFAULT NULL,
   `isOnline` int(11) DEFAULT NULL,
   `category` varchar(32) DEFAULT NULL,
-  `posterId` int(11) DEFAULT NULL,
   `gname` varchar(32) DEFAULT NULL,
+  `posterId` int(11) DEFAULT NULL,
   PRIMARY KEY (`gid`),
-  KEY `FK3080BD40BB78EE` (`posterId`),
-  CONSTRAINT `FK3080BD40BB78EE` FOREIGN KEY (`posterId`) REFERENCES `Customer` (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `FK3080BD1172CCCE` (`posterId`),
+  CONSTRAINT `FK3080BD1172CCCE` FOREIGN KEY (`posterId`) REFERENCES `customer` (`cid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,16 +182,15 @@ CREATE TABLE `message` (
   `title` varchar(10) DEFAULT NULL,
   `content` varchar(100) DEFAULT NULL,
   `mstime` datetime DEFAULT NULL,
+  `category` int(11) DEFAULT NULL,
   `sender` int(11) DEFAULT NULL,
   `receiver` int(11) DEFAULT NULL,
-  `category` tinyint(4) DEFAULT NULL,
-  `hasRead` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`mid`),
-  KEY `FK38EB0007DD94A7FB` (`sender`),
-  KEY `FK38EB0007E36077B5` (`receiver`),
-  CONSTRAINT `FK38EB0007DD94A7FB` FOREIGN KEY (`sender`) REFERENCES `Customer` (`cid`),
-  CONSTRAINT `FK38EB0007E36077B5` FOREIGN KEY (`receiver`) REFERENCES `Customer` (`cid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  KEY `FK38EB0007AE4BFBDB` (`sender`),
+  KEY `FK38EB0007B417CB95` (`receiver`),
+  CONSTRAINT `FK38EB0007B417CB95` FOREIGN KEY (`receiver`) REFERENCES `customer` (`cid`),
+  CONSTRAINT `FK38EB0007AE4BFBDB` FOREIGN KEY (`sender`) REFERENCES `customer` (`cid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +199,7 @@ CREATE TABLE `message` (
 
 LOCK TABLES `message` WRITE;
 /*!40000 ALTER TABLE `message` DISABLE KEYS */;
-INSERT INTO `message` VALUES (1,'s','sddsa',NULL,1,1,1,1),(2,'?','sddsa',NULL,1,1,1,1);
+INSERT INTO `message` VALUES (1,'新用户注册审核请求','用户[id:1 234234]','2015-09-03 08:15:34',0,1,NULL);
 /*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,18 +214,18 @@ CREATE TABLE `morder` (
   `oid` int(11) NOT NULL AUTO_INCREMENT,
   `hasPay` int(11) DEFAULT NULL,
   `price` float DEFAULT NULL,
+  `gname` varchar(32) DEFAULT NULL,
   `gid` int(11) DEFAULT NULL,
   `buyerId` int(11) DEFAULT NULL,
   `salerId` int(11) DEFAULT NULL,
-  `gname` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`oid`),
-  KEY `FKC051C3012236FBD4` (`buyerId`),
-  KEY `FKC051C30182A8CD2C` (`salerId`),
-  KEY `FKC051C30119E85267` (`gid`),
-  CONSTRAINT `FKC051C30119E85267` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`),
-  CONSTRAINT `FKC051C3012236FBD4` FOREIGN KEY (`buyerId`) REFERENCES `Customer` (`cid`),
-  CONSTRAINT `FKC051C30182A8CD2C` FOREIGN KEY (`salerId`) REFERENCES `Customer` (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `FKC051C301F2EE4FB4` (`buyerId`),
+  KEY `FKC051C3015360210C` (`salerId`),
+  KEY `FKC051C301AC249647` (`gid`),
+  CONSTRAINT `FKC051C301AC249647` FOREIGN KEY (`gid`) REFERENCES `good` (`gid`),
+  CONSTRAINT `FKC051C3015360210C` FOREIGN KEY (`salerId`) REFERENCES `customer` (`cid`),
+  CONSTRAINT `FKC051C301F2EE4FB4` FOREIGN KEY (`buyerId`) REFERENCES `customer` (`cid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,4 +246,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-30 15:47:25
+-- Dump completed on 2015-09-03  8:31:02

@@ -66,7 +66,7 @@ public class GoodDaoImpl extends BasicOperationImpl implements GoodDao{
 
 	@Override
 	public Good findByGid(int gid) {
-        String hql = "from good g where g.gid=?";
+        String hql = "from Good g where g.gid=?";
         List ls = this.getHibernateTemplate().find(hql, new Object[]{gid});
 		return ls.size()==0?null:(Good)ls.get(0);
 	}

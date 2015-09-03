@@ -1,64 +1,61 @@
-alter table buyerRecord drop foreign key FKD57E07E457C8DBC5;
-alter table buyerRecord drop foreign key FKD57E07E4B83AAD1D;
-alter table buyerRecord drop foreign key FKD57E07E4F201D2D8;
-alter table collection drop foreign key FK9835AE9EF201D2D8;
-alter table collection drop foreign key FK9835AE9E4927EE75;
-alter table evaluation drop foreign key FK332C073CF201D2D8;
-alter table evaluation drop foreign key FK332C073C4927EE75;
-alter table good drop foreign key FK3080BD764D58DF;
-alter table message drop foreign key FK38EB0007132687EC;
-alter table message drop foreign key FK38EB000718F257A6;
-alter table morder drop foreign key FKC051C30157C8DBC5;
-alter table morder drop foreign key FKC051C301B83AAD1D;
-alter table morder drop foreign key FKC051C301F201D2D8;
+alter table buyerRecord drop foreign key FKD57E07E4F2EE4FB4;
+alter table buyerRecord drop foreign key FKD57E07E45360210C;
+alter table buyerRecord drop foreign key FKD57E07E4AC249647;
+alter table collection drop foreign key FK9835AE9EAC249647;
+alter table collection drop foreign key FK9835AE9EE44D6264;
+alter table evaluation drop foreign key FK332C073CAC249647;
+alter table evaluation drop foreign key FK332C073CE44D6264;
+alter table good drop foreign key FK3080BD1172CCCE;
+alter table message drop foreign key FK38EB0007AE4BFBDB;
+alter table message drop foreign key FK38EB0007B417CB95;
+alter table morder drop foreign key FKC051C301F2EE4FB4;
+alter table morder drop foreign key FKC051C3015360210C;
+alter table morder drop foreign key FKC051C301AC249647;
 
-drop table if exists Customer;
 drop table if exists buyerRecord;
 drop table if exists collection;
+drop table if exists customer;
 drop table if exists evaluation;
 drop table if exists good;
 drop table if exists message;
 drop table if exists morder;
-drop table if exists superAdmin;
 
-create table Customer (cid integer not null auto_increment, name varchar(10), password varchar(32), province varchar(3), city varchar(10), area varchar(32), school varchar(32), phonenumber varchar(11), isAdmin integer, authority integer, primary key (cid));
+create table buyerRecord (bid integer not null auto_increment, gname varchar(32), hasPay integer, price float, gid integer, buyerId integer, salerId integer, primary key (bid));
 
-create table buyerRecord (bid integer not null auto_increment, hasPay integer, price float, gid integer, buyerId integer, salerId integer, primary key (bid));
+create table collection (clid integer not null auto_increment, gname varchar(32), cid integer, gid integer, primary key (clid));
 
-create table collection (cid integer not null, gid integer not null, primary key (cid, gid));
+create table customer (cid integer not null auto_increment, name varchar(10), password varchar(32), province varchar(3), city varchar(10), area varchar(32), school varchar(32), phonenumber varchar(11), authority integer, qqnumber varchar(32), confirm integer, primary key (cid));
 
 create table evaluation (eid integer not null auto_increment, content varchar(100), cid integer, gid integer, primary key (eid));
 
-create table good (gid integer not null auto_increment, price float, intro varchar(100), isOnline integer, category varchar(32), posterId integer, primary key (gid));
+create table good (gid integer not null auto_increment, price float, intro varchar(100), isOnline integer, category varchar(32), gname varchar(32), posterId integer, primary key (gid));
 
-create table message (mid integer not null auto_increment, title varchar(10), content varchar(100), isFromToSA integer, mstime datetime, sender integer, receiver integer, primary key (mid));
+create table message (mid integer not null auto_increment, title varchar(10), content varchar(100), mstime datetime, category integer, sender integer, receiver integer, primary key (mid));
 
-create table morder (oid integer not null auto_increment, hasPay integer, price float, gid integer, buyerId integer, salerId integer, primary key (oid));
+create table morder (oid integer not null auto_increment, hasPay integer, price float, gname varchar(32), gid integer, buyerId integer, salerId integer, primary key (oid));
 
-create table superAdmin (said integer not null auto_increment, sname varchar(10), password varchar(32), primary key (said));
+alter table buyerRecord add index FKD57E07E4F2EE4FB4 (buyerId), add constraint FKD57E07E4F2EE4FB4 foreign key (buyerId) references customer (cid);
 
-alter table buyerRecord add index FKD57E07E457C8DBC5 (buyerId), add constraint FKD57E07E457C8DBC5 foreign key (buyerId) references Customer (cid);
+alter table buyerRecord add index FKD57E07E45360210C (salerId), add constraint FKD57E07E45360210C foreign key (salerId) references customer (cid);
 
-alter table buyerRecord add index FKD57E07E4B83AAD1D (salerId), add constraint FKD57E07E4B83AAD1D foreign key (salerId) references Customer (cid);
+alter table buyerRecord add index FKD57E07E4AC249647 (gid), add constraint FKD57E07E4AC249647 foreign key (gid) references good (gid);
 
-alter table buyerRecord add index FKD57E07E4F201D2D8 (gid), add constraint FKD57E07E4F201D2D8 foreign key (gid) references good (gid);
+alter table collection add index FK9835AE9EAC249647 (gid), add constraint FK9835AE9EAC249647 foreign key (gid) references good (gid);
 
-alter table collection add index FK9835AE9EF201D2D8 (gid), add constraint FK9835AE9EF201D2D8 foreign key (gid) references good (gid);
+alter table collection add index FK9835AE9EE44D6264 (cid), add constraint FK9835AE9EE44D6264 foreign key (cid) references customer (cid);
 
-alter table collection add index FK9835AE9E4927EE75 (cid), add constraint FK9835AE9E4927EE75 foreign key (cid) references Customer (cid);
+alter table evaluation add index FK332C073CAC249647 (gid), add constraint FK332C073CAC249647 foreign key (gid) references good (gid);
 
-alter table evaluation add index FK332C073CF201D2D8 (gid), add constraint FK332C073CF201D2D8 foreign key (gid) references good (gid);
+alter table evaluation add index FK332C073CE44D6264 (cid), add constraint FK332C073CE44D6264 foreign key (cid) references customer (cid);
 
-alter table evaluation add index FK332C073C4927EE75 (cid), add constraint FK332C073C4927EE75 foreign key (cid) references Customer (cid);
+alter table good add index FK3080BD1172CCCE (posterId), add constraint FK3080BD1172CCCE foreign key (posterId) references customer (cid);
 
-alter table good add index FK3080BD764D58DF (posterId), add constraint FK3080BD764D58DF foreign key (posterId) references Customer (cid);
+alter table message add index FK38EB0007AE4BFBDB (sender), add constraint FK38EB0007AE4BFBDB foreign key (sender) references customer (cid);
 
-alter table message add index FK38EB0007132687EC (sender), add constraint FK38EB0007132687EC foreign key (sender) references Customer (cid);
+alter table message add index FK38EB0007B417CB95 (receiver), add constraint FK38EB0007B417CB95 foreign key (receiver) references customer (cid);
 
-alter table message add index FK38EB000718F257A6 (receiver), add constraint FK38EB000718F257A6 foreign key (receiver) references Customer (cid);
+alter table morder add index FKC051C301F2EE4FB4 (buyerId), add constraint FKC051C301F2EE4FB4 foreign key (buyerId) references customer (cid);
 
-alter table morder add index FKC051C30157C8DBC5 (buyerId), add constraint FKC051C30157C8DBC5 foreign key (buyerId) references Customer (cid);
+alter table morder add index FKC051C3015360210C (salerId), add constraint FKC051C3015360210C foreign key (salerId) references customer (cid);
 
-alter table morder add index FKC051C301B83AAD1D (salerId), add constraint FKC051C301B83AAD1D foreign key (salerId) references Customer (cid);
-
-alter table morder add index FKC051C301F201D2D8 (gid), add constraint FKC051C301F201D2D8 foreign key (gid) references good (gid);
+alter table morder add index FKC051C301AC249647 (gid), add constraint FKC051C301AC249647 foreign key (gid) references good (gid);

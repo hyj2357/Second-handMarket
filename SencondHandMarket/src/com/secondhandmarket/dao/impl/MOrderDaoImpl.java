@@ -66,7 +66,7 @@ public class MOrderDaoImpl extends BasicOperationImpl implements MOrderDao{
 	
 	@Override
 	public MOrder findByOid(int oid) {
-        String hql = "from morder mo where mo.oid=?";
+        String hql = "from Morder mo where mo.oid=?";
         List ls = this.getHibernateTemplate().find(hql, new Object[]{oid});
 		return ls.size()==0?null:(MOrder)ls.get(0);
 	}
